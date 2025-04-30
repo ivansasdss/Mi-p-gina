@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Mi primera página moderna</title>
+  <style>
+    body {font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    color: #333;
+    margin: 0;
+    padding: 20px;}
+    h1 {color: #4CAF50;}
+    img {max-width: 100%;
+    border-radius: 10px;}
+    form {background-color: white;
+    padding: 15px;
+    margin-top: 30px;
+    border-radius: 10px;
+    max-width: 500px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);}
+    input, textarea {width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;}
+    button {background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;}
+    button:hover {background-color: #388E3C;}
+    #comentarios-lista {background-color: #fff;
+    padding: 15px;
+    margin-top: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);}
+    .comentario {border-bottom: 1px solid #ccc;
+    padding-bottom: 10px;
+    margin-bottom: 10px;}
+    .comentario:last-child {border-bottom: none;}
+  </style>
+</head>
+<body>
+  <h1>Bienvenido a mi sitio web</h1>
+  <p>Estoy aprendiendo a programar en HTML.</p>
+  <img src="Practica.jpg" alt="Imagen de Practica">
+  <h2>Deja un comentario</h2>
+  <form id="form-comentario">
+    <label for="nombre">Nombre:</label><br>
+    <input type="text" id="nombre" required><br><br>
+    <label for="comentario">Comentario:</label><br>
+    <textarea id="comentario" name="comentario" rows="4" cols="50" required></textarea><br><br>
+    <input type="url" id="enlace" placeholder="https://ejemplo.com"><br><br>
+    <button type="submit">Publicar</button>
+  </form>
+  <h3>Comentarios:</h3>
+  <div id="comentarios-lista"></div>
+
+  <script>
+    document.getElementById("form-comentario").addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      const nombre = document.getElementById("nombre").value;
+      const comentario = document.getElementById("comentario").value;
+      const enlace = document.getElementById("enlace").value;
+
+      if (nombre && comentario) {
+        const nuevoComentario = document.createElement("div");
+        nuevoComentario.classList.add("comentario");
+        nuevoComentario.innerHTML = `
+          <strong>${nombre}</strong>
+          <p>${comentario}</p>
+          ${enlace ? `<a href="${enlace}" target="_blank">${enlace}</a>` : ""}
+        `;
+        document.getElementById("comentarios-lista").appendChild(nuevoComentario);
+
+        document.getElementById("nombre").value = "";
+        document.getElementById("comentario").value = "";
+        document.getElementById("enlace").value = "";
+      } else {
+        alert("Por favor, completa todos los campos requeridos.");
+      }
+    });
+  </script>
+</body>
+</html>
